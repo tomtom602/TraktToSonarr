@@ -72,8 +72,8 @@ class Application(object):
       #list of show to ignore (not monitor)
       self.Ignored = None
       if self.TraktIgnoreList:
-        self.Ignored = Trakt['users/*/lists/*'].get(self.TraktUser, self.TraktIgnoreList).items()
-        
+        IgnoredTmp = Trakt['users/*/lists/*'].get(self.TraktUser, self.TraktIgnoreList).items()
+        self.Ignored = [x for x in IgnoredTmp if isinstance(x, Show)]
             
       for item in showList:
         # if str(type(item)) == 'Show':
