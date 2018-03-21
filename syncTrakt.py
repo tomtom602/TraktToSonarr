@@ -312,8 +312,9 @@ class Application(object):
     seasons=[]
     traktId = self.getTraktID(show)
     traktSeasons = Trakt['shows'].seasons(traktId)
-    for season in traktSeasons:
-      seasons.append({'seasonNumber': season.keys[0], 'monitored': self.isToWatchedSeason(traktId, season, watchedShow)})
+    if traktSeasons:
+      for season in traktSeasons:
+        seasons.append({'seasonNumber': season.keys[0], 'monitored': self.isToWatchedSeason(traktId, season, watchedShow)})
     
     monitored = True    
     if self.Ignored and len([x for x in self.Ignored if self.getTvdbId(x) == tvdbId]) > 0:
